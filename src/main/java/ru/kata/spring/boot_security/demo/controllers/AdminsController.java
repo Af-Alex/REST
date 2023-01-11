@@ -26,7 +26,7 @@ public class AdminsController {
     public String showUsersList(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         model.addAttribute("usersList", userService.findAllUsers());
         model.addAttribute("userDetails", userDetails);
-        model.addAttribute("admin", userService.findByUsername(userDetails.getUsername()));
+        model.addAttribute("currentUser", userService.findByUsername(userDetails.getUsername()));
         model.addAttribute("roles", roleService.findAll());
         return "admin";
     }
@@ -34,7 +34,7 @@ public class AdminsController {
     @GetMapping("/new")
     public String showNewUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         model.addAttribute("userDetails", userDetails);
-        model.addAttribute("admin", userService.findByUsername(userDetails.getUsername()));
+        model.addAttribute("currentUser", userService.findByUsername(userDetails.getUsername()));
         model.addAttribute("roles", roleService.findAll());
         model.addAttribute("user", new User());
         return "/new";
